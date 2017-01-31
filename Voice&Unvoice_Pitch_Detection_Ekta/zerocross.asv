@@ -1,0 +1,29 @@
+%% Function for computing the zero crossing rate w.r.t window
+% Function Input:
+%   Audio sample and window 
+% Function Opr:
+%   Computing the ZeroCrossingRate wrt window
+% Function Output:
+%   ZeroCrossingrate w.r.t window
+% Start of File
+
+%%%%function zc = zerocross(x,wintype,winamp,winlen)
+function ZCR_Win = zerocrossrate(ip_samples,win_type,win_amp,win_len)
+error(nargchk(1,4,nargin,'struct'));
+
+% For computing the frist order
+% Generating x[n] and 1Delay sequence x[n-1]
+IP_Sequence_1Delay= [0, ip_samples(1:end-1)];
+IP_Sequence=ip_samples;
+
+% Generating the Frist Order Difference 
+FristOrderDiff= sgn(IP_Sequence)-sgn(IP_Sequence_1Delay);
+
+% Computing the only maginutde part ignoring the sign
+MagFristOrderDiff = abs(FristOrderDiff);
+
+% Fil
+zc = winconv(absFirstDiff,wintype,winamp,winlen);
+\
+
+%End of File 
